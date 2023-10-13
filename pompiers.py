@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 pd.set_option('display.max_columns', 60)
 import numpy as np
-import openpyxl as op
 
 with open('style.css') as f:
     css = f.read()
