@@ -1,0 +1,23 @@
+Column,Description
+IncidentNumber,LFB Incident Number
+CalYear,Year of 999 call
+HourOfCall,Hour of 999 call
+ResourceMobilisationId,LFB Resource Mobilisation ID
+Resource_Code,LFB Resource Code
+PerformanceReporting,First Pump arrived at incident
+DateAndTimeMobilised,Date and time of mobilised (GMT)
+DateAndTimeMobile,Date and time of mobile (GMT)
+DateAndTimeArrived,Date and time arrived (GMT)
+TurnoutTimeSeconds,Turnout time in seconds
+TravelTimeSeconds,Travel time in seconds
+AttendanceTimeSeconds,Attendance time in seconds
+DateAndTimeLeft,Date and time left the incident (GMT)
+DateAndTimeReturned,Date and time returned to station (GMT)
+DeployedFromStation_Code,Deployed from station code
+DeployedFromStation_Name,Deployed from station name
+DeployedFromLocation,Deployed from location
+PumpOrder,Pump order
+PlusCode_Code,Code of Plus Code
+PlusCode_Description,Description of Plus Code
+DelayCodeId,Delay code ID
+DelayCode_Description,Delay code description

@@ -1,0 +1,39 @@
+Column,Description
+IncidentNumber,LFB Incident Number
+DateOfCall,Date of 999 call
+CalYear,Year of 999 call
+TimeOfCall,Time of 999 call
+HourOfCall,Hour of 999 call
+IncidentGroup,High level incident category
+StopCodeDescription,Detailed incident category
+SpecialServiceType,Further detail for special services incident categories
+PropertyCategory,High level property descriptor
+PropertyType,Detailed property descriptor
+AddressQualifier,Qualifies location of actual incident relevant to category above
+Postcode_full,Postcode
+Postcode_district,Postcode Districs
+UPRN,Unique Property Reference Number
+USRN,Unique Street Reference Number
+IncGeo_BoroughCode,Borough Code
+IncGeo_BoroughName,Borough Name
+ProperCase,Borough Name
+IncGeo_WardCode,Ward Code
+IncGeo_WardName,Ward Name
+IncGeo_WardNameNew,New Ward Name
+Easting_m,Easting
+Northing_m,Northing
+Easting_rounded,Easting rounded up to nearest 50
+Northing_rounded,Northing rounded up to nearest 50
+Latitude,Latitude
+Longitude,Longitude
+FRS,Fire Service ground
+IncidentStationGround,LFB Station ground
+FirstPumpArriving_AttendanceTime,First Pump attendance time in seconds
+FirstPumpArriving_DeployedFromStation,First Pump deployed from station
+SecondPumpArriving_AttendanceTime,Second Pump attendance time in seconds
+SecondPumpArriving_DeployedFromStation,Second Pump deployed from station
+NumStationsWithPumpsAttending,Number of stations with pumps in attendance
+NumPumpsAttending,Number of pumps in attendance
+PumpCount,
+PumpHoursRoundUp,"Time spent at incident by pumps, rounded up to nearest hour"
+Notional Cost (£),Time spent multiplied by notional annual cost of a pump
