@@ -59,15 +59,14 @@ if page == pages[0] :
   
   col1, col2 = st.columns(2)
 
-  docu_incident = pd.read_excel("Metadata.xlsx" )
-  docu_mobilisations = pd.read_excel("Mobilisations Metadata.xlsx" )
-  
   with col1:
     st.write("***Incident Records***")
-    st.dataframe(docu_incident[['Column','Description']])
+    metadata = pd.read_csv("Metadata.csv")
+    st.dataframe(metadata)
   with col2:
     st.write("***Mobilisation Records***")
-    st.dataframe(docu_mobilisations[['Column','Description']])
+    metadata_mobi = pd.read_csv("Mobilisations-Metadata.csv")
+    st.dataframe(metadata_mobi)
 
   st.markdown("Nous disposons de 3 colonnes communes aux 2 jeux de données (*IncidentNumber*, *Calyear*, et *HourOfCall*) à partir desquelles\
                nous allons **fusionner nos tables**.")
