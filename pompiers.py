@@ -233,6 +233,21 @@ if page == pages[2] :
             est celui qui fait le plus perdre de temps aux equipes, suivi d'une autre cause moins explicite qui indique que l'équipe est arrivée mais\
             qu'elle a été retenue pour une autre raison ou encore que l'équipe était déjà en intervention à l'exterieur au moment de l'appel par le centre de contrôle.")
 
+## DataViz Temps de réponse et Distance
+  st.markdown(" ")
+  st.markdown("**:red[Temps de Trajet moyen et Distance moyenne parcourue par Quartier]**")
+  st.markdown("Le graphique ci-dessous affiche par quartier de Londres le Temps de Réponse moyen ainsi que la Distance moyenne parcourue")
+  
+  path_to_plot6 = "plot6.html" 
+  with open(path_to_plot6,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=1000, height=450)
+
+  with st.expander(label = "Lecture du graphique"):
+    st.write("**Constat :** Alors que nous pensions plus évidente la corrélation entre le Temps de Réponse et la Distance, nous constatons ici, en regardant ces deux métriques\
+             par Quartier de Londres, qu'il n'existe pas de façon évidente une relation entre ces deux variables.")
+
+## DataViz Volume d'Incidents et de Mobilisations
   st.markdown(" ")
   st.subheader("Le volume d'Incidents et de Mobilisations")
 
