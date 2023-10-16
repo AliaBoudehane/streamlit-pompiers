@@ -247,9 +247,25 @@ if page == pages[2] :
     st.write("**Constat :** Alors que nous pensions plus évidente la corrélation entre le Temps de Réponse et la Distance, nous constatons ici, en regardant ces deux métriques\
              par Quartier de Londres, qu'il n'existe pas de façon évidente une relation entre ces deux variables.")
 
-## DataViz avec Volume d'Incidents et de Mobilisations
+### DataViz avec Volume d'Incidents et de Mobilisations
   st.markdown(" ")
   st.subheader("Le volume d'Incidents et de Mobilisations")
+
+  ## DataViz Nombre d'incidents par année
+  st.markdown("**:red[Volume d'incidents par Année]**")
+  st.markdown("Le graphique ci-dessous nous permet de visualiser le **Volume d'incidents** selon l'année, avec une disctinction faite selon le **Type d'incident**.")
+  path_to_plot7 = "plot7.html" 
+  with open(path_to_plot7,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=900, height=450)
+
+  with st.expander(label = "Lecture du graphique"):
+    st.write("**Constat :** Nous constatons une grande proportion de fausse alarme dans laquelle nous avons une majorité AFA- Automatic Fire Alarm (alarme déclenchée automatiquement\
+            par les detecteurs de fumée). Concernant les feux il y a majoritairement des feux de grande ampleur.\
+             \n\n Au cours des années le volume d'incidents varie sensiblement, cependant nous constatons un accroissement constant depuis 2015.\
+             \n\n L'année 2023 n'étant pas finie elle n'est pas encore éligible à une bonne lecture, nos données s'arretent à Juillet 2023 soit 60% de l'année , si la tendance moyenne\
+              d'évolution du volume d'incident du mois reste la même nous pourrions nous attendre à avoir un volume dépassant les 170 000 incidents d'ici la fin de l'année.\
+             Une estimation qui vient se rapprocher des résultats de l'année 2022.") 
 
   ## DataViz Nombre d'incident selon heure de la journée
   st.markdown("**:red[Nombre d'Incidents selon Heure de la Journée]**")
