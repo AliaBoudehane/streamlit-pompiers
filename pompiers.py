@@ -247,7 +247,7 @@ if page == pages[2] :
     st.write("**Constat :** Alors que nous pensions plus évidente la corrélation entre le Temps de Réponse et la Distance, nous constatons ici, en regardant ces deux métriques\
              par Quartier de Londres, qu'il n'existe pas de façon évidente une relation entre ces deux variables.")
 
-## DataViz Volume d'Incidents et de Mobilisations
+## DataViz avec Volume d'Incidents et de Mobilisations
   st.markdown(" ")
   st.subheader("Le volume d'Incidents et de Mobilisations")
 
