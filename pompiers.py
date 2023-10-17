@@ -584,8 +584,8 @@ if page == pages[4]:
          
   left_co, cent_co,last_co = st.columns(3)
   
-  #with cent_co:
-      #st.image("perfect_prediction.png", width=200)
+  with cent_co:
+      st.image("perfect_prediction.png", width=200)
 
 
   st.markdown("Nous décidons de supprimer les colonnes d’identification et \
