@@ -2,13 +2,6 @@ import streamlit as st
 import pandas as pd
 pd.set_option('display.max_columns', 60)
 import numpy as np
-import pickle
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
-from sklearn.ensemble import  RandomForestRegressor, RandomForestClassifier
-from sklearn.metrics import mean_squared_error, mean_absolute_error, classification_report
 
 #### INTÉGRATION DU FICHIER CSS 
 with open('style.css') as f:
