@@ -2,14 +2,26 @@ import streamlit as st
 import pandas as pd
 pd.set_option('display.max_columns', 60)
 import numpy as np
+import joblib
+from joblib import load
+import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
+from sklearn.ensemble import  RandomForestRegressor, RandomForestClassifier
+from sklearn.metrics import mean_squared_error, mean_absolute_error, classification_report
 
+#### INTÉGRATION DU FICHIER CSS 
 with open('style.css') as f:
     css = f.read()
 
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
+#### TITRE DU STREAMLIT
 st.title("Temps de réponse - Brigade des Sapeurs Pompiers de Londres")
 
+#### CRÉATION DE LA SIDEBAR
 sidebar_title = '<p style="color:White; font-size: 26px;">Sommaire</p>'
 st.sidebar.markdown(sidebar_title, unsafe_allow_html=True)
 
@@ -25,7 +37,8 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane | <a href="htt
                     \n- <p style="font-size: 14px"> Maïna Le Roux | <a href="https://www.linkedin.com/in/mainaleroux" style="color: white;font-size: 14px">LinkedIn</a> </p>', unsafe_allow_html=True)
 
 
-#Page 1
+#### PAGE 1 : INTRODUCTION
+
 if page == pages[0] : 
   st.image('lfb2.jpeg')
   st.header("Introduction")
@@ -80,13 +93,13 @@ if page == pages[0] :
   df_consolidated = df_consolidated.drop(columns = 'index')
   st.dataframe(df_consolidated)
 
-  st.write("La taille de notre dataframe est : **(2220718, 58)**")
+  st.write("La taille de notre dataframe est : `(2220718, 58)`")
 
   st.markdown("Pour la suite du projet et notamment la partie modélisation, c'est la variable ***:red[AttendanceTimeSeconds]*** que nous choisissons comme\
               notre **variable cible**. Il s'agit du temps de réponse pour un camion mobilisé, comprenant le temps de préparation de la brigade\
                une fois cette dernière informée ainsi que le temps de trajet pour ce rendre sur le lieu de l'incident.")
 
-#Page 2
+#### PAGE 2 : ENRICHISSEMENTS ET DATA CLEANING
 if page == pages[1] : 
   st.header("Enrichissements & Data Cleaning")
   st.markdown(" ")
@@ -164,7 +177,8 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
   df_modelisation = pd.read_csv("df_modelisation.csv",index_col = 0)
   st.dataframe(df_modelisation)
 
-#Page 3
+#### PAGE 3 : DATAVIZ
+
 if page == pages[2] : 
   st.header("DataVizualization")
   st.markdown(" ")
@@ -247,7 +261,7 @@ if page == pages[2] :
     st.write("**Constat :** Alors que nous pensions plus évidente la corrélation entre le Temps de Réponse et la Distance, nous constatons ici, en regardant ces deux métriques\
              par Quartier de Londres, qu'il n'existe pas de façon évidente une relation entre ces deux variables.")
 
-### DataViz avec Volume d'Incidents et de Mobilisations
+
   st.markdown(" ")
   st.subheader("Le volume d'Incidents et de Mobilisations")
 
@@ -268,6 +282,7 @@ if page == pages[2] :
              Une estimation qui vient se rapprocher des résultats de l'année 2022.") 
 
   ## DataViz Nombre d'incident selon heure de la journée
+  st.markdown(" ")
   st.markdown("**:red[Nombre d'Incidents selon Heure de la Journée]**")
   st.markdown("Le graphique ci-dessous nous permet de visualiser le **Volume d'incidents** selon l'heure de la journée, avec une disctinction faite selon le **Type d'incident**.\
               Il est également possible d'afficher l'année de son choix.")
@@ -294,12 +309,354 @@ if page == pages[2] :
     st.write("**Constat :** Nous observons que certains des quartiers qui ont un bon temps de réponse ont aussi une grosse proportion de fausses alarmes. Aussi,\
              la quantité d'incidents ne semble pas influencer la performance de rapidité du temps de réponse. Le type d'incident ne doit donc que partiellement\
             influencer la disparité des performances par quartier.")
+
+
+#### PAGE 4 : MODELISATION
+
+if page == pages[3]:
+  st.header("Modelisation")
+
+  #df = pd.read_csv("df_final2.csv", low_memory = False, index_col = 0)
+
+  st.write("En premier lieu nous devons nettoyer notre jeu de données et supprimer les colonnes que nous avions gardé pour la DataVisualisation.\
+  \nNous supprimons les colonnes d'identification (ID), la colonne DateOfCall qui répètent les informations de Day0fCall, MonthOfCall et CalYear ainsi que les colonnes TurnoutTimeSeconds et TravelTimeSeconds afin d’éviter une fuite donnée qui donneraient à tort une surperformance à notre modèle de prédiction, car elles permettent de calculer notre variable cible.")
+
+  st.write("Ensuite nous réduisons notre jeu de données en ne gardant que les informations postérieures à 2015 car une dizaine de caserne ont fermé fin 2014 dans le cadre d’un plan de secours de sauvegarde financière. \
+  \nCe choix a été fait afin de ne pas fausser les estimations sur ces casernes qui seraient sous représentées et afin également de supprimer les Nans présents dans la colonne Distance pour ces casernes.")
+
+  st.write("Pour continuer ce nettoyage nous avons modifié le type de certaines variable numérique en catégorielle car ce sont des indicateurs temporels et qu’il ne faut pas que le modèle de prédiction cherche à les quantifier ou les ordonner.")
+
+
+  # REDUCTION DE DIMENSIONS
+  st.subheader("Reduction de dimensions")
+
+  st.write("Nous avons donc maintenant un jeu de données de taille `(1295782, 20)`. Nous avons donc décidé de tenter une réduction de dimensions, après avoir encodé nos variables catégorielles et standardiser nos données, nous nous retrouvons avec 351 colonnes et une explication de la variance comme suit : ")
+  
+  st.image("pca_variance.png")
+  with st.expander(label = "Lecture du graphique"):
+    st.write("Nous  constatons une chute à environ 40 nombres de facteurs, voyons voir ce que cela représente en terme de pourcentage.")
+
+  st.image("pca_ratio.png")
+  with st.expander(label = "Lecture du graphique"):
+    st.write("Cela ne représente que 30% de notre jeu de données, c'est peu. Par curiosité, nous visualisons avec deux axes ce que cela représente.")
+
+  st.image("cercle.png")
+  with st.expander(label = "Lecture du graphique"):
+    st.write("Comme nous nous y attendions, cela n'est pas très parlant, plusieurs groupes de variables semblent être bien corrélées entre elles mais il n'y a aucun intérêt à réduire ici les dimensions sur deux axes puisque les corrélations avec les axes sont très faibles, la plupart d’entre elles ne dépassent même pas les 0.2, -0.2. \n\n Nous ne pouvons donc pas nous aider des réductions de dimensions pour réduire notre jeu de données.")
+    
+  # CORRELATIONS
+  st.subheader("Corrélations")
+
+  st.write("Afin d’optimiser notre modèle de prédictions nous décidons d’étudier les corrélations entre les variables explicatives et la variable cible.")
+
+  st.markdown("- ##### Variables Numériques")
+
+  # Heatmap
+  st.image("heatmap.png")
+  with st.expander(label = "Lecture du graphique"):
+    st.write("A l'aide de cette heatmap, nous décidons de supprimer les colonnes CallCount et MobilisationTime car ce sont celles qui sont le moins corrélées à notre variable cible AttendanceTimeSeconds.")
+  
+
+  st.markdown("- ##### Variables Catégorielles")
+  # Test Anova
+  anova = pd.read_csv("anova.csv")
+  st.dataframe(anova)
+
+  with st.expander(label = "Lecture du tableau"):
+    st.write("Le résultat est sans appel, toutes nos variables explicatives sont corrélées à notre variable cible. Nous décidons donc de toutes les garder.")
+
+
+
+  # MODELISATION
+  st.subheader("Modélisation")  
+
+  st.write("Notre objectif est d’obtenir un score de test supérieur à 70%.\
+  \nNotre variable cible est une variable continue, ce qui signifie que nous avons à faire à une méthode de régression. Après encodage de notre jeu de données\
+   nous avons un data frame de taille `(1295782 , 363)`.\
+  \n\n Notre tâche sera d’estimer en fonction des informations fournies, le temps d’intervention potentiel.\
+  \n \nNous allons essayer les 3 algorithmes suivants :") 
+  st.markdown("- Linear Regression \
+  \n- Decision Tree Regressor \
+  \n- Random Forest Regressor")
+
+  st.write("Pour l’évaluation de la performance de nos prédictions nous disposons du MSE, RMSE, MAE et score R2.")
+
+  #####  RESULTAT DES 3 MODELES REGRESSION##### 
+ 
+  tab1, tab2, tab3 = st.tabs(["Linear Regression", "Decision Tree Regressor", "Random Forest Regressor"])
+
+  with tab1:
+    st.image("linear_reg.png")
+   
+  with tab2:
+    st.image("dtr.png")
+   
+  with tab3:
+    st.image("rf.png")
+
+  st.write("Au vu des résultats du score r2, la métrique la plus lisible, nous avons pu déterminer que le Random Forest est l’algorithme le plus performant.\
+  \nCependant, nous avons un grand dataframe et ce modèle est très énergivore (Plus d’une heure d'execution).\
+  \nNous décidons donc de convertir nos valeurs dans notre variable cible en différentes classes afin de simplifier notre prédictions en une classification.")
+
+  st.write("Pour déterminer la séparation de ces classes, nous observons la distribution de notre variable cible.")
+
+  path_to_plot6bis = "plot6_bis.html" 
+  with open(path_to_plot6bis,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=800, height=400)
+
+  st.write("Nous décidons de séparer notre variables en 5 classes avec , 1 classe par quartile puis 1 classe pour les valeurs extrêmes.")
+
+  path_to_plot7bis = "plot7_bis.html" 
+  with open(path_to_plot7bis,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=910, height=450)
+
+
+  st.write("Etant donné que notre variable cible est dorénavant une variable catégorielle, nous décidons de re-lancer un test de corrélation, nous choisirons le test de khi2 d’indépendance:")
+
+  # Test Khi2 d'indépendance
+  khi2 = pd.read_csv("khi2.csv")
+  st.dataframe(khi2) 
+
+  with st.expander(label = "Lecture du tableau"):
+    st.write("Encore une fois, nous constatons que la variable cible est bien dépendante de toutes les variables explicatives.\
+    \nNous conservons donc toutes les variables catégorielles.")
+
+  st.write("Nous allons relancer 3 nouveaux modèles , de classification cette fois ci :") 
+  st.markdown("- Logistic Regression \
+  \n- Decision Tree Classifier \
+  \n- Random Forest Classifier")
+
+  st.write("Cette fois-ci, étant donné qu’il s’agit d’un modèle de classification, nous utiliserons le R2 score, le rapport de classification ainsi qu’un tableau de confusion pour évaluer la performance des différents modèles. L’ensemble de ces métriques nous apporte des informations importantes sur notre résultat.")
+
+
+  #####  RESULTAT DES 3 MODELES CLASSIFICATION (5 CLASSES) ##### 
+  tab1, tab2, tab3 = st.tabs(["Logistic Regression", "Decision Tree Classifier", "Random Forest Classifier"])
+
+  with tab1:
+    st.image("lr5.png")
+    
+  with tab2:
+    st.image("dt5.png")
+
+  with tab3:
+    st.image("rf5.png")
     
 
+  st.write("Random Forest est encore une fois le modèle le plus performant et cette fois-ci l'exécution est nettement plus rapide(moins de 10min), nous allons approfondir nos recherches sur ce modèle.\
+  \n\nTout d'abord nous allons modifier la classification car beaucoup de valeurs écartées se retrouvent dans la même classe,nous allons donc les répartir par temps similaire plutôt que par part égales de valeurs. En effet la classe 5 a un très mauvais recall, cela se comprend par le fait qu’il s’agit de valeurs extrêmes, elles sont moins bien représentées pour commencer mais aussi elles sont moins logiques pour le modèle de prédictions donc plus difficile encore à prédire.\
+  \n\nEnsuite nous étudierons les features importantes afin de visualiser si certaines colonnes peuvent être supprimées.\
+  \n\nPour finir nous nous pencherons sur les hyperparamètres.")
+
+  # ETAPE 1: LES CLASSES
+  st.markdown("- ##### Etape 1: Retravailler les classes")
+
+  st.write("Nous décidons de réduire nos classes, afin de déterminer la séparation de ces classes, nous observons les zones où se regroupent les temps les plus similaires. Pour cela nous ferons deux test:\
+  \n\n Le premier test avec 4 classes. \
+  \nPour ce qui est de la classe 4 nous décidons d’y inclure les valeurs les plus fortes plus les valeurs extrêmes ce qui semble être le plus logique pour la compréhension de ces valeurs extrêmes.\
+  \nNous avons donc :\
+  \nClasse 1(Temps rapide) : De 0 à 2:48 (2 min et 48 sec)\
+  \nClasse 2(Temps moyen): De 2:48 à 5:48\
+  \nClasse 3(Temps long): De 5:48 à 10:24\
+  \nClasse 4(Temps très long) : De 10:24 à 20min.")
+
+  path_to_plot8 = "plot8.html" 
+  with open(path_to_plot8,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=910, height=450)
+
+  st.write("Le deuxième test avec 3 classes. \
+  \nNous avons donc :\
+  \nClasse 1(Temps rapide) : De 0 à 4:04 (2 min et 48 sec)\
+  \nClasse 2(Temps moyen): De 04:04 à 10:24\
+  \nClasse 3(Temps long): De 10:24 à 20min")
+
+  path_to_plot9 = "plot9.html" 
+  with open(path_to_plot9,'r') as f:
+    html_data = f.read()
+  st.components.v1.html(html_data,width=910, height=450)
+
+  st.write(" Observons les résultats")
+
+  
+
+  ##### RESULTAT DES 2 MODELES (4 classes et 3 classes) ##### 
+
+  option = st.selectbox(
+    'Choissisez le nombre de classes pour voir le résultat',
+    ('4 classes', '3 classes'))
+  
+  if option == "4 classes":
+    st.image("rf_4.png")
+
+  if option == "3 classes":
+    st.image("rf_3.png")
+
+
+  with st.expander(label = "Lecture des résultats"):
+    st.write("Les classes sont toutes bien prédites et nous avons un très bon score ainsi que de bons résultats de precision, recall et donc de F1\
+    \nNous allons maintenant tenter d'affiner la performance grâce aux features performances.")
+
+  # ETAPE 2 : FEATURES IMPORTANCES
+  st.markdown("- ##### Etape 2 : Features Importances")
+
+  st.image("features.png")
+
+  with st.expander(label = "Lecture des résultats"):
+   st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.\
+    \n\nNous automatisons un calcul qui nous donnera la feature importance par variable complète.\
+  Nous constatons que les variables PropertyCategory, StopCodeDescription, SpecialServiceType et IncidentGroup sont les moins impactantes sur le jeu de données.") 
+   
+  st.image("full_features.png")
+
+  st.write("Nous décidons donc de les supprimer une par une pour voir si cela améliore la performance de notre modèle de prédiction.\
+  \nMalgré le fait qu'elles aient une faible importance à chaque que nous retirons une variable, nous nous rendons compte que le modèle est (légèrement) moins performant.\
+  \nNous décidons de les garder\
+  \nNotre dernière étape pour l'amélioration de notre performance est de déterminer les meilleurs hyperparamètres pour notre modèle de prédictions.")
+
+  # ETAPE 3 : HYPERPARAMETRES
+  st.markdown("- ##### Etape 3 : Hyperparamètres")
+
+  st.write("Afin de connaître rapidement quelles seraient les meilleures hyperparamètres, nous allons utiliser la validation croisée (cross-validation) pour évaluer différentes combinaisons d'hyper paramètres et choisir celle qui donne les meilleures performances.\
+  \nPour cela, nous nous servirons de SearchGridCV dont voici les résultats: ")
+
+  st.image("SearchGridCV.png")
+  st.write("Résultat:")
+  st.image("Search_results.png")
+
+  st.write("Nous garderons donc la configuration suivante")
+  st.image("best_hyperparametre.png")
+
+  st.write("Voici le résultat final")
+
+  ##### DERNIER RESULTAT  #####
+
+  st.image("rf3h.png")
+
+
+  st.success("Nous avons atteint notre objectif !\
+  \n\n Nous avons légèrement amélioré notre prédiction, le résultat est atteint et nous en sommes très satisfait.",icon ="🎉")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### PAGE 5 : CONCLUSION  
 
 if page == pages[4]:
   st.markdown(" ")
   st.image('lfb1.svg.png', width = 300)
   st.header('Conclusion')
 
+  st.markdown("Afin de traiter au mieux notre sujet, le choix de notre variable cible s’est donc porté sur :red[**AttendanceTimeSeconds**].\
+              Il s'agit du temps (en secondes) entre le moment où la brigade reçoit l'alerte et le moment où elle arrive sur le site de l’incident.")
+  # Partie 1
+
+  st.subheader("DataViz et Modélisation")
+
+  st.markdown("Les indicateurs de position, de dispersion, loi normale, les corrélations, \
+              nous ont permis de prendre des décisions sur les choix que nous avons faits pour constituer le modèle nous permettant \
+              de prédire au mieux le temps de réponse en fonction des différents facteurs pouvant influencer notre valeur cible. \
+                  Nous avons pu notamment constater que  les incidents étaient souvent liés à de fausses alertes. \
+                      L’heure, la journée, la caserne, le secteur du site d’incident, \
+                          pouvaient avoir un impact sur notre variable cible.")
+
+  st.markdown("Ainsi, pour la modélisation, dans un premier temps, \
+              nous garderons les colonnes ayant une relation avec catégories citées ci-dessus ou ayant un \
+                  faible nombre de valeurs uniques. Pour même accélérer, les calculs, \
+                      nous partirons d’un intervalle de données entre 2015 – 2023, faire une réduction des données. \
+                          Suite aux tests de régressions, nous nous apercevons des scores très performants, \
+                              comme l’on peut le voir ci-dessous :")
+
+         
+  left_co, cent_co,last_co = st.columns(3)
+  
+  with cent_co:
+      st.image("perfect_prediction.png", width=200)
+
+
+  st.markdown("Nous décidons de supprimer les colonnes d’identification et \
+              surtout les variables explicatives ayant servies à calculer notre « variable cible ». \
+                  Aussi, après concertation avec notre mentor, nous partons sur une logique de classification, \
+                      et ensuite travailler sur les classes et les hyper paramètres.")
+       
+  st.markdown("Le passage à différentes classes, ont permis d'améliorer \
+              les modèles avec un  « Random Forest » qui présente un résultat plus performant \
+                  que les autres modèles. Les hyper paramètres ont permis d’atteindre notre objectif.")
+
+  st.markdown("Si nous avions voulu aller plus loin, nous aurions pu \
+              aller chercher comme nous l'avions fait pour le calcul de la distance, \
+                  des informations pouvant influer sur notre valeur cible, tel que la météo, le trafic, la pandémie...")
+
+  st.markdown("Dans le prolongement de notre projet, nous aurions pu aussi utiliser la variable cible \
+              'MobilisationTime' pour la modélisation. Et pour une meilleure performance tester \
+                  d'autres modèles comme les réseaux de neurones, SVM…")
+                  
+  # Partie 2
+  st.subheader("Bilan des difficultés rencontrées")
+
+  st.markdown("Nous souhaitions également faire le bilan des difficultés rencontrées \
+              durant notre projet.  Nous avons en effet rencontré plusieurs problèmes que ce soit durant l’exploitation des \
+                  données ou durant les tests de modélisations.")
+
+  st.markdown("Pour ce qu'il est de la partie exploitation des données, voici les quelques principales difficultés rencontrées :")
+
+  st.markdown("<p style='font-size:16px;  text-align: justify;'>\
+             <ul><li><strong>Compréhension du jeu de données</strong> de certaines variables : PumpOrder, PlusCode_Description... \
+                  Malgré les fichier de metadata présentant une courte description des variables, \
+                      certaines interprétations nous semblaient difficiles. Pour s’assurer de la bonne interprétation des données, \
+                          nous avons consulté directement des BI Analyst  du site de LFB.</li></ul></p>"
+              , unsafe_allow_html=True)
+
+  
+
+  st.markdown("""
+              - **Gestion des variables au format Datetime** : Nous avions initialement décidé de travailler  les dates et heures disponibles dans notre jeu de données pour constituer\
+               une nouvelle variable cible « Response Time » (valeur cible initiale). Des erreurs détectées dans le format des dates nous a amené à changer la valeur cible ‘AttendanceTimeSeconds’ pour plus de facilité et après discutions avec notre mentor.
+              """)
+                
+  st.markdown("""- **Une volumétrie importante :**\
+              \n  * **58 colonnes** qui nous ont rendu le choix difficile dans la sélection/suppression des ces dernières.\
+              \n  *  **2,2 millions de lignes** qui ont ralenti l'exécution de certaines tâches (calculs, dataviz, modèles prédictifs), et qui ont également\
+              rendu difficile la lecture des graphes de distribution. En effet, bien que nos variables numériques suivent majoritairement une distribution de type\
+              loi normmale, la grande présence d'outliers est une des difficultés que nous avons rencontrée.""")
+        
+  st.markdown("Le choix a été de supprimer les données avant 2015, un choix fait en raison de la fermeture des casernes.\
+              Le site officiel  précise aussi que depuis Janvier 2014, 10 stations avaient fermé leur porte.\
+              Nous prendrons ainsi les données à partir de 2015 afin d’alléger notre dataset.")
+  
+  # Partie 3  
+  st.subheader("Notre retour d’expérience")   
+            
+  st.markdown("Il nous semblait également important de partager notre retour d’expérience global sur ce projet, réalisé dans le cadre de notre formation Data Analyst chez DataScientest.")
+
+  st.markdown("D’une part, nous avons eu une très bonne dynamique de groupe, avec une répartition des tâches équitable, dans un environnement d'entraide et de joie de partager ses connaissances.\
+              \n\n D’autre part, nous tenions à remercier l’équipe de DataScientest, organisme grâce auquel nous avons suivi notre formation de DataAnalyst,\
+              de nous avoir permis d'apprendre dans les meilleures conditions.")
+  
+  st.markdown("Merci également à notre mentor Mr Yazid Msaadi pour son accompagnement et sa précieuse aide. Il a su nous guider dans l’atteinte de notre objectif sur ce projet fil rouge.")
+  
+  st.markdown("Merci à l’équipe d’animation des Masterclass, avec qui nous avons envie d’en apprendre encore plus et qui nous a permis d’avoir en temps et en heure les connaissances pour l’avancement de notre projet. Enfin un merci à l’équipe de support, proactive sur nos demandes.")
   
