@@ -42,11 +42,11 @@ if page == pages[0] :
             dans le monde en comptabilisant un total de 171 067 appels d’urgence et en traitant 20934 feux ! \
            \nC’est d’ailleurs l’une des plus grandes organisations de lutte contre les incendies et de secours au monde, agissant dans la protection des personnes\
             et biens contre les incendies sur un périmètre de 1587 kilomètres carrés autour du Grand Londres.\
-           \n\n Dans cette étude, nous plongerons dans l'analyse des données liées aux performances passées de la London Fire Brigade, en mettant l'accent\
-            sur leur **:red[efficacité de temps de réponse].** \n\nNous allons dans un premier temps prendre connaissance de notre jeu de données\
-            qui proviennent du site officiel et gouvernemental de la London Fire Brigade. Nous allons étudier puis nettoyer ces données afin de les rendre\
+           \n\n Dans cette étude, nous nous plongeons dans l'analyse des données liées aux performances passées de la London Fire Brigade, en mettant l'accent\
+            sur leur **:red[efficacité de temps de réponse].** \n\nNous avons dans un premier temps prendre connaissance de notre jeu de données\
+            qui provient du site officiel et gouvernemental de la London Fire Brigade. Nous avons étudié puis nettoyé ces données afin de les rendre\
             les plus lisibles et utiles à notre étude.\
-           \n\n Nous utiliserons ensuite des techniques d'analyse de données et des modèles de prédiction pour mieux comprendre les tendances historiques\
+           \n\n Nous avons utilisé ensuite des techniques d'analyse de données et des modèles de prédiction pour mieux comprendre les tendances historiques\
             et les facteurs qui influencent ces mesures cruciales.")
 
 
