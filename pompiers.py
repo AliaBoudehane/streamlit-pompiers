@@ -4,7 +4,7 @@ pd.set_option('display.max_columns', 60)
 import numpy as np
 
 
-#### INTÉGRATION DU FICHIER CSS 
+### INTÉGRATION DU FICHIER CSS 
 with open('style.css') as f:
     css = f.read()
 
