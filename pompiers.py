@@ -517,7 +517,7 @@ if page == pages[3]:
   with st.expander(label = "Lecture des résultats"):
    st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.\
     \n\nNous automatisons un calcul qui nous donnera la feature importance par variable complète.\
-  Nous constatons que les variables PropertyCategory, StopCodeDescription, SpecialServiceType et IncidentGroup sont les moins impactantes sur le jeu de données.") 
+  Nous constatons que les variables DelayCode, Distance et HourOfCall sont les plus impactantes sur le jeu de données.") 
    
   st.image("full_features.png")
   st.image("top_features.png")
