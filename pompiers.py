@@ -409,16 +409,6 @@ if page == pages[3]:
   st.components.v1.html(html_data,width=910, height=450)
 
 
-  st.write("Etant donné que notre variable cible est dorénavant une variable catégorielle, nous décidons de re-lancer un test de corrélation, nous choisirons le test de khi2 d’indépendance:")
-
-  # Test Khi2 d'indépendance
-  khi2 = pd.read_csv("khi2.csv")
-  st.dataframe(khi2) 
-
-  with st.expander(label = "Lecture du tableau"):
-    st.write("Encore une fois, nous constatons que la variable cible est bien dépendante de toutes les variables explicatives.\
-    \nNous conservons donc toutes les variables catégorielles.")
-
   st.write("Nous allons relancer 3 nouveaux modèles , de classification cette fois ci :") 
   st.markdown("- Logistic Regression \
   \n- Decision Tree Classifier \
@@ -492,27 +482,11 @@ if page == pages[3]:
 
   with st.expander(label = "Lecture des résultats"):
     st.write("Les classes sont toutes bien prédites et nous avons un très bon score ainsi que de bons résultats de precision, recall et donc de F1\
-    \nNous allons maintenant tenter d'affiner la performance grâce aux features performances.")
+    \nNous allons maintenant tenter d'affiner la performance grâce aux hyperparamètres.")
 
-  # ETAPE 2 : FEATURES IMPORTANCES
-  st.markdown("- ##### Etape 2 : Features Importances")
-
-  st.image("features.png")
-
-  with st.expander(label = "Lecture des résultats"):
-   st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.\
-    \n\nNous automatisons un calcul qui nous donnera la feature importance par variable complète.\
-  Nous constatons que les variables PropertyCategory, StopCodeDescription, SpecialServiceType et IncidentGroup sont les moins impactantes sur le jeu de données.") 
-   
-  st.image("full_features.png")
-
-  st.write("Nous décidons donc de les supprimer une par une pour voir si cela améliore la performance de notre modèle de prédiction.\
-  \nMalgré le fait qu'elles aient une faible importance à chaque que nous retirons une variable, nous nous rendons compte que le modèle est (légèrement) moins performant.\
-  \nNous décidons de les garder\
-  \nNotre dernière étape pour l'amélioration de notre performance est de déterminer les meilleurs hyperparamètres pour notre modèle de prédictions.")
-
-  # ETAPE 3 : HYPERPARAMETRES
-  st.markdown("- ##### Etape 3 : Hyperparamètres")
+ 
+  # ETAPE 2 : HYPERPARAMETRES
+  st.markdown("- ##### Etape 2 : Hyperparamètres")
 
   st.write("Afin de connaître rapidement quelles seraient les meilleures hyperparamètres, nous allons utiliser la validation croisée (cross-validation) pour évaluer différentes combinaisons d'hyper paramètres et choisir celle qui donne les meilleures performances.\
   \nPour cela, nous nous servirons de SearchGridCV dont voici les résultats: ")
@@ -533,6 +507,25 @@ if page == pages[3]:
 
   st.success("Nous avons atteint notre objectif !\
   \n\n Nous avons légèrement amélioré notre prédiction, le résultat est atteint et nous en sommes très satisfait.",icon ="🎉")
+
+ # FEATURES IMPORTANCES
+  st.markdown("- ##### Features Importances")
+  st.write("Nous allons étudier les feature importances pour deceler quelles \
+  \nsont les variables ayant le plus de poids et quelles conclusions pouvons nous tirer de notre travail de modélisation")
+
+  st.image("features.png")
+
+  with st.expander(label = "Lecture des résultats"):
+   st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.\
+    \n\nNous automatisons un calcul qui nous donnera la feature importance par variable complète.\
+  Nous constatons que les variables PropertyCategory, StopCodeDescription, SpecialServiceType et IncidentGroup sont les moins impactantes sur le jeu de données.") 
+   
+  st.image("full_features.png")
+
+  st.write("Nous décidons donc de les supprimer une par une pour voir si cela améliore la performance de notre modèle de prédiction.\
+  \nMalgré le fait qu'elles aient une faible importance à chaque que nous retirons une variable, nous nous rendons compte que le modèle est (légèrement) moins performant.\
+  \nNous décidons de les garder\
+  \nNotre dernière étape pour l'amélioration de notre performance est de déterminer les meilleurs hyperparamètres pour notre modèle de prédictions.")
 
 
 
