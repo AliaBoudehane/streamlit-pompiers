@@ -3,6 +3,7 @@ import pandas as pd
 pd.set_option('display.max_columns', 60)
 import numpy as np
 
+
 #### INTÉGRATION DU FICHIER CSS 
 with open('style.css') as f:
     css = f.read()
@@ -142,8 +143,12 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
               \n Afficher un aperçu de df_final\
               et aussi df.info(), autre information intéressante à ce stade")
   
-  st.markdown('**:red[Gestion des Doublons]**')
+  st.markdown('**:red[Gestion des doublons]**')
   st.markdown("Nous n'avions aucun doublon dans notre jeu de données.")
+
+  st.markdown('**:red[Gestion des outliers]**')
+  st.markdown("Nos outliers étaient majoritairement des valeurs extrêmes réalistes. Pour les quelques valeurs aberrantes (quelques lignes), nous\
+              avons fait le choix de les supprimer.")
 
   st.markdown('**:red[Gestion des valeurs manquantes]**')
   st.markdown("Concernant les Nans, nous décidons de supprimer toutes les lignes pour lesquels le pourcentage de Nan dans la colonne est inférieur à 2%.\
@@ -533,32 +538,16 @@ if page == pages[3]:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### PAGE 5 : CONCLUSION  
 
 if page == pages[4]:
   st.markdown(" ")
-  st.image('lfb1.svg.png', width = 300)
+
+  left_co, cent_co,last_co = st.columns(3)
+  
+  with cent_co:
+      st.image('lfb1.svg.png', width = 300)
+
   st.header('Conclusion')
 
   st.markdown("Afin de traiter au mieux notre sujet, le choix de notre variable cible s’est donc porté sur :red[**AttendanceTimeSeconds**].\
@@ -651,3 +640,120 @@ if page == pages[4]:
   
   st.markdown("Merci à l’équipe d’animation des Masterclass, avec qui nous avons envie d’en apprendre encore plus et qui nous a permis d’avoir en temps et en heure les connaissances pour l’avancement de notre projet. Enfin un merci à l’équipe de support, proactive sur nos demandes.")
   
+  st.subheader("*Conclusion version 2*")
+
+  st.subheader("Notre parcours : Réussites et Difficultés")
+
+  st.markdown('**:red[Variable cible]**')
+
+  st.markdown("En premier lieu, nous avions décidé de travailler sur deux variables cibles :\
+              \n 1. ***ResponseTime*** qui correspond au temps écoulé entre le moment où l'appel est reçu par le centre d’appel 999 et le moment où la brigade\
+               arrive sur les lieux de l’incident.\
+              \n 2. ***MobilisationTime*** qui représente le temps passé sur l’incident.\
+              \n\n Le premier obstacle que nous avons rencontré est dû au format des variables temporelles. En effet la variable ResponseTime n’existe pas,\
+               il fallait donc la calculer à l’aide de variables déjà présentes. Des erreurs détectées dans le format des dates nous ont amené à changer cette\
+               valeur cible pour :red[***AttendanceTimeSeconds***] qui représente le temps nécessaire à l’équipe d’intervention pour se préparer et se rendre sur le lieu\
+               de l’incident.")
+
+  st.markdown(" ")
+  
+  st.markdown('**:red[Découverte et premier Data Cleaning]**')
+
+  st.markdown("La première chose qui nous a interpellé est le **volume des données**, nous avions avant toute modification, deux dataframes que nous avons couplé\
+               pour obtenir un jeu de données de taille (2220718, 58).\
+              \n\n Il nous a fallu en premier lieu tenter de comprendre l’intégralité de ces variables. Certaines semblaient évidentes, d’autres, malgré\
+               la présence des fichiers de Metadata présentant une courte description des variables, ont nécessité la sollicitation de Bi Analyst et Data Analyst\
+               du site LFB que nous avons contacté pour s’assurer de la bonne interprétation des données.\
+              \n\n Une fois cela fait, nous avons pu décider quelles variables devaient être supprimées.\
+              Cette étape fut complexe par la diversité de celles-ci et l’anticipation requise dans l’analyse de leur nécessité pour le calcul de notre variable\
+               cible.\
+              \nCependant l’évaluation de certaines a été facilitée par le fait qu’elles représentaient un doublon sous forme de code.\
+              \n\n Après cela, nous avons passé une bonne partie sur le cleaning et l’enrichissement de nos données. Nous avons agrémenté notre dataset de diverses\
+               variables temporelles ainsi que de la variable :red[***Distance***] qui permet d’établir la distance entre la caserne d’où décolle la brigade et le lieu\
+               de l’incident.")
+  
+  st.markdown(" ")
+
+  st.markdown('**:red[DataViz]**')
+
+  st.markdown("Nous avons pris plaisir à cette étape de notre projet et avons proposé un large panel de visualisations.\
+              \n\nNous avons cependant été restreint par les performances réduites et les bugs liés à la volumétrie importante de nos données\
+               et l’utilisation de certaines librairies.\
+              \n\n En effet nous avons fortement apprécié les visualisations et l’interface proposées par Plotly express, mais il a été difficile\
+               de les générer pour certains d’entre eux.\
+              \n\n Nous sommes fiers d’avoir pu proposer des cartes pour nos visualisations que nous avons créées grâce aux fichiers GeoJson que nous nous\
+               sommes procurés sur le site du London Data Store et également par le biais d’une des Data Analyst que nous avons contacté.")
+
+  st.markdown(" ")
+
+  st.markdown('**:red[Modélisation]**')
+
+  st.markdown("Encore une fois lors de cette étape, nous avions un gros challenge concernant l’importante volumétrie de nos données.\
+              \n\n Nous avons tenté de réduire au mieux les données sans perdre d’informations précieuses à notre travail de prédiction. Nous avons pour\
+               cela mis en application diverses techniques dont la réduction de dimensions, la heatmap, les tests de corrélation et d’indépendance ainsi\
+               que les features importances. Nous avons également réduit nos données aux dates supérieures à 2015, puisque fin 2014, 10 casernes ont fermé\
+               dans le cadre d’un plan de sauvegarde financière.\
+              \n\n Cette abondance de données nous a d’ailleurs obligé à basculer sur un modèle de classification pour améliorer la rapidité et la précision\
+               de notre modèle le plus performant.\
+              \n\n Malgré notre motivation et par faute de temps, nous avons décidé de nous concentrer uniquement sur la première variable cible AttendanceTimeSeconds.\
+              Nous avons utilisé plusieurs modèles et l’avons amélioré jusqu’à atteindre notre objectif. Notre meilleur modèle retenu est le Random Forest Classifier,\
+               avec notre variable cible définie en 3 classes distinctes. Via ce modèle, nous avons obtenu un :red[**f1-score de 0.68, 0.7, 0.89 ainsi qu’un R2 de 78,18**],\
+              atteignant donc notre objectif.")
+  
+  st.markdown(" ")
+
+  st.markdown('**:red[Aller plus loin]**')
+
+  st.markdown("Afin d’aller plus loin, nous aurions pu, comme nous l'avions fait pour le calcul de la distance, enrichir notre dataset en allant chercher\
+               des informations externes pouvant influer sur notre valeur cible, tel que la météo, le trafic ou encore la pandémie.\
+              \n\n Dans le prolongement de notre projet, nous aurions pu aussi utiliser la variable cible *MobilisationTime* pour la modélisation.\
+              Avec plus de temps et d'expertise et afin d’obtenir une meilleure performance, nous aurions pu tester d'autres modèles comme les réseaux de neurones,\
+              SVM…")
+  
+  st.markdown(" ")
+
+  st.markdown('**:red[Gestion du temps]**')
+
+  st.image("gantt.jpeg")
+
+  st.subheader("Notre retour d'expérience")
+
+  st.markdown("Il nous semblait également important de partager notre retour d’expérience global sur ce projet, réalisé dans le cadre de notre formation Data Analyst chez DataScientest.\
+               \n\n Ce projet fut une belle expérience, nous avons pu mettre en pratique énormément d’outils que nous avons appris pendant les cours. Nous avons\
+               même pu nous aider du projet pour pratiquer plus en profondeur nos apprentissages.\
+              \n\n D’une part, nous avons eu une très bonne dynamique de groupe, avec une répartition des tâches équitable, dans un environnement d'entraide\
+               et de joie de partager ses connaissances.\
+              \n\n D’autre part, nous tenions à remercier l’équipe de DataScientest, organisme grâce auquel nous avons suivi notre formation de Data Analyst,\
+               de nous avoir permis d'apprendre dans les meilleures conditions.\
+              \n\n Merci également à notre mentor Mr Yazid Msaadi pour son accompagnement et ses précieuses recommandations qui nous ont été d’une grande aide.\
+               Il a su nous guider dans l’atteinte de notre objectif sur ce projet fil rouge.\
+              \n\n Merci à l’équipe d’animation des Masterclass, avec qui nous avons envie d’en apprendre encore plus et qui nous a permis d’avoir en temps\
+               et en heure les connaissances pour l’avancement de notre projet. Enfin un merci à l’équipe de support, proactive sur nos demandes.")
+
+  st.markdown(" ")
+
+  st.subheader("Bibliographie")
+
+  col1, col2 = st.columns(2)
+
+  with col1:
+     st.markdown("**Jeux de données:**\
+                 \n - Incident Report\
+                 \n - Mobilisation\
+                 \n\n **Compréhension des variables et enjeux :**\
+                 \n - Fire statistics \
+                 \n - Fires in Greater London\
+                 \n - Incident response time\
+                 \n\n **Carte :**\
+                 \n - Statistical GIS Boundary Files for London \
+                 \n - Borough of London GeoJSON file")
+     
+  with col2:
+     st.markdown("**Vérification d’outlier :**\
+                 \n - Incendie de la tour Grenfell \
+                 \n - Incendie du 12 Août 2012\
+                 \n\n **Latitude et longitudes des casernes:**\
+                 \n - Majorité des casernes \
+                 \n - Caserne Dartford\
+                 \n - Caserne Esher\
+                 \n - Caserne  Hertfordshire")
