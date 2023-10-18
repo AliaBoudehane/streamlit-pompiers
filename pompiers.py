@@ -520,7 +520,7 @@ if page == pages[3]:
   st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.\
   Nous constatons que les variables DelayCode, Distance et HourOfCall sont les plus impactantes sur le jeu de données.") 
 
-  check = st.checkbox('Afficher le code')
+  case = st.checkbox("Afficher le code")
   code = '''feature_importances = rf.feature_importances_
 
 column_to_variable = {}
@@ -537,7 +537,7 @@ for variable, columns in column_to_variable.items():
     
 sorted_variable_importances = sorted(variable_importances.items(), key=lambda x: x[1], reverse=True)'''
     
-  if check:
+  if case:
     st.code(code, language='python')
    
   st.image("full_features.png")
