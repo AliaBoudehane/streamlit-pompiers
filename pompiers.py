@@ -568,7 +568,7 @@ if page == pages[4]:
   st.markdown('**:red[Découverte et premier Data Cleaning]**')
 
   st.markdown("La première chose qui nous a interpellé est le **volume des données**, nous avions avant toute modification, deux dataframes que nous avons couplé\
-               pour obtenir un jeu de données de taille (2220718, 58).\
+               pour obtenir un jeu de données de taille `(2220718, 58)`.\
               \n\n Il nous a fallu en premier lieu tenter de comprendre l’intégralité de ces variables. Certaines semblaient évidentes, d’autres, malgré\
                la présence des fichiers de Metadata présentant une courte description des variables, ont nécessité la sollicitation de Bi Analyst et Data Analyst\
                du site LFB que nous avons contacté pour s’assurer de la bonne interprétation des données.\
