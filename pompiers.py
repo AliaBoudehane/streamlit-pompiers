@@ -510,8 +510,7 @@ if page == pages[3]:
 
  # FEATURES IMPORTANCES
   st.markdown("- ##### Features Importances")
-  st.write("Nous allons étudier les feature importances pour deceler quelles \
-  \nsont les variables ayant le plus de poids et quelles conclusions pouvons nous tirer de notre travail de modélisation")
+  st.write("Nous allons étudier les feature importances pour deceler quelles sont les variables ayant le plus de poids et quelles conclusions pouvons nous tirer de notre travail de modélisation")
 
   st.image("features.png")
 
@@ -522,10 +521,11 @@ if page == pages[3]:
    
   st.image("full_features.png")
 
-  st.write("Nous décidons donc de les supprimer une par une pour voir si cela améliore la performance de notre modèle de prédiction.\
-  \nMalgré le fait qu'elles aient une faible importance à chaque que nous retirons une variable, nous nous rendons compte que le modèle est (légèrement) moins performant.\
-  \nNous décidons de les garder\
-  \nNotre dernière étape pour l'amélioration de notre performance est de déterminer les meilleurs hyperparamètres pour notre modèle de prédictions.")
+  st.write(":red[***Notre avis métier***]")
+
+  st.write("La variable ayant le plus grand impact est DelayCode, nous avions pu constater grâce aux datavisualisation que le motif de retard qui impactait le plus notre variable cible est le fait d’avoir une adresse incomplète. Une recommandation que nous pourrions faire et de lancer une campagne pédagogique auprès de l’équipe du centre d’appel pour mieux capturer et communiquer l'information de l'adresse.
+La seconde variable est Distance, de là on peut se demander si l’attribution des casernes par rapport au lieu des incidents est optimal et dans le cas contraire retravailler la repartition.
+Pour finir, nous avons la variable HourOfCall et nous supposons que les heures de grand trafic ou les heures où le volume d’incident sont les plus importants sont ceux qui font augmenter le temps de réponse mais à notre niveau nous ne pouvons pas proposer de solution si ce n’est une augmentation des effectifs, ce qui doit assurément être une problématique déjà connue de la LFB.")
 
 
 
