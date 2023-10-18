@@ -520,6 +520,7 @@ if page == pages[3]:
   Nous constatons que les variables PropertyCategory, StopCodeDescription, SpecialServiceType et IncidentGroup sont les moins impactantes sur le jeu de données.") 
    
   st.image("full_features.png")
+  st.image("top_features.png")
 
   st.write(":red[Notre avis métier]")
 
