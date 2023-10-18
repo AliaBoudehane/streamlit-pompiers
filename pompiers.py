@@ -504,7 +504,6 @@ if page == pages[3]:
 
   st.image("rf3h.png")
 
-
   st.success("Nous avons atteint notre objectif !\
   \n\n Nous avons légèrement amélioré notre prédiction, le résultat est atteint et nous en sommes très satisfait.",icon ="🎉")
 
@@ -517,10 +516,9 @@ if page == pages[3]:
   with st.expander(label = "Lecture des résultats"):
    st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.")
 
-  st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.\
-  Nous constatons que les variables DelayCode, Distance et HourOfCall sont les plus impactantes sur le jeu de données.") 
+  st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.") 
 
-  case = st.checkbox("Afficher le code")
+  case = st.checkbox('Afficher le code')
   code = '''feature_importances = rf.feature_importances_
 
 column_to_variable = {}
