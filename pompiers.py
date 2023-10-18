@@ -515,9 +515,30 @@ if page == pages[3]:
   st.image("features.png")
 
   with st.expander(label = "Lecture des résultats"):
-   st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.\
-    \n\nNous automatisons un calcul qui nous donnera la feature importance par variable complète.\
+   st.write("Etant donné que nos variables catégorielles ont été encodé, nous avons un affichage de ces variables par valeurs.")
+
+  st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.\
   Nous constatons que les variables DelayCode, Distance et HourOfCall sont les plus impactantes sur le jeu de données.") 
+
+  check = st.checkbox('Afficher le code')
+  code = '''feature_importances = rf.feature_importances_
+
+column_to_variable = {}
+for col in X_train.columns:
+    variable = col.split('_')[0] 
+    if variable not in column_to_variable:
+        column_to_variable[variable] = []
+    column_to_variable[variable].append(col)
+    
+variable_importances = {}
+for variable, columns in column_to_variable.items():
+    importance = sum([feature_importances[X_train.columns.get_loc(col)] for col in columns])
+    variable_importances[variable] = importance
+    
+sorted_variable_importances = sorted(variable_importances.items(), key=lambda x: x[1], reverse=True)'''
+    
+  if check:
+    st.code(code, language='python')
    
   st.image("full_features.png")
   st.image("top_features.png")
