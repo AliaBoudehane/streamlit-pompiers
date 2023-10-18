@@ -162,7 +162,7 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
               \n\n Suite à la sélection finale des variables que nous conserverons avant d'entâmer la partie modélisation, notre jeu de données ne présente plus aucun Nan.")
 
   st.markdown('**:red[Variables Conservées dans notre DataFrame Final]**')
-  st.markdown("Voici la liste des variables conservées, avant de démarrer nos premières modélisations :\
+  st.markdown("Voici la liste des variables conservées (**25 au total**), avant de démarrer nos premières modélisations :\
               \n\n *'IncidentNumber', 'DateOfCall', 'CalYear', 'HourOfCall',\
               'IncidentGroup', 'StopCodeDescription', 'SpecialServiceType', 'PropertyCategory', 'AddressQualifier', 'BoroughName', 'IncidentStationGround',\
               'NumStationsWithPumpsAttending', 'NumPumpsAttending', 'CallCount', 'ResourceMobilisationId', 'TurnoutTimeSeconds', 'TravelTimeSeconds', 'AttendanceTimeSeconds',\
