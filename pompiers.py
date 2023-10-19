@@ -661,8 +661,7 @@ if page == pages[4]:
                  \n - Incident response time\
                  \n - Fermeture des casernes en 2014\
                  \n\n **Carte :**\
-                 \n - Statistical GIS Boundary Files for London \
-                 \n - Borough of London GeoJSON file")
+                 \n - Statistical GIS Boundary Files for London : Borough of London GeoJSON file")
      
   with col2:
      st.markdown("**Vérification d’outlier :**\
