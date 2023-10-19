@@ -17,7 +17,7 @@ st.title("Temps de réponse - Brigade des Sapeurs Pompiers de Londres")
 sidebar_title = '<p style="color:White; font-size: 26px;">Sommaire</p>'
 st.sidebar.markdown(sidebar_title, unsafe_allow_html=True)
 
-pages=["Introduction", "Enrichissements & Data Cleaning","DataVizualization", "Modélisation",
+pages=["Introduction", "Enrichissements & Data Cleaning","DataVizualisation", "Modélisation",
        "Conclusion"]
 page=st.sidebar.radio('', pages)
 
@@ -174,7 +174,7 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
 #### PAGE 3 : DATAVIZ
 
 if page == pages[2] : 
-  st.header("DataVizualization")
+  st.header("DataVizualisation")
   st.markdown(" ")
   st.subheader("La variable cible : AttendanceTimeSeconds")
   
