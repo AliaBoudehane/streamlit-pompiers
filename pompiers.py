@@ -515,7 +515,7 @@ if page == pages[3]:
 
   st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.") 
 
-  case = st.checkbox("Afficher le code")
+  case = st.checkbox(":gary[Afficher le code]")
   code = '''feature_importances = rf.feature_importances_
 
 column_to_variable = {}
