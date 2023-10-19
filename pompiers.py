@@ -110,7 +110,7 @@ if page == pages[1] :
    
 case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
 
-   code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
+code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
 def haversine(lat1, lon1, lat2, lon2):
     # Rayon de la Terre en mètres
     radius = 6371000
