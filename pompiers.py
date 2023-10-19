@@ -32,11 +32,7 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane | <a href="htt
 st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane |'
     """<a href="https://www.linkedin.com/in/alia-boudehane-704172185/">
     <img src="data:image/png;base64,{}" width="25">
-    </a>""".format(
-        base64.b64encode(open("LinkedIn.png", "rb").read()).decode()
-    ),
-    unsafe_allow_html=True,
-)
+    </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 
 #### PAGE 1 : INTRODUCTION
 
