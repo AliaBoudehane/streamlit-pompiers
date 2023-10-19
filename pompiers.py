@@ -107,10 +107,9 @@ if page == pages[1] :
               \n - **Calcul de la distance** : à partir des coordonnées géographiques des casernes et des lieux d'incidents, nous avons pû calculer une nouvelle variable : la\
                :red[***Distance*** *(en mètre)*] parcourue pour chaque mobilisation.\
               \n - **Vérification** : pour se rassurer sur la pertinence du calcul effectué, nous avons testé plusieurs distances sur Google Maps.")
-   
-case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
-
-code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
+  
+  case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
+  code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
 def haversine(lat1, lon1, lat2, lon2):
     # Rayon de la Terre en mètres
     radius = 6371000
