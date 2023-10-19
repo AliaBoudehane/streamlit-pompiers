@@ -107,8 +107,12 @@ if page == pages[1] :
               \n - **Calcul de la distance** : à partir des coordonnées géographiques des casernes et des lieux d'incidents, nous avons pû calculer une nouvelle variable : la\
                :red[***Distance*** *(en mètre)*] parcourue pour chaque mobilisation.\
               \n - **Vérification** : pour se rassurer sur la pertinence du calcul effectué, nous avons testé plusieurs distances sur Google Maps.")
-  
-  with st.expander("Calcul de la Distance (code)"):
+
+
+
+
+    case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
+
     code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
 def haversine(lat1, lon1, lat2, lon2):
     # Rayon de la Terre en mètres
@@ -131,7 +135,8 @@ def haversine(lat1, lon1, lat2, lon2):
 
 # Appliquer la fonction haversine pour calculer la distance et ajouter une colonne "Distance" au DataFrame
 df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"], row["Station_Latitude"], row["Station_Longitude"]), axis=1) '''
-    st.code(code,language='python')
+    if case:
+    st.code(code, language='python') 
 
   st.markdown(" ")
   st.markdown('**:red[La variable DateOfCall]**')
@@ -515,7 +520,7 @@ if page == pages[3]:
 
   st.write("Nous automatisons un calcul qui nous donnera la feature importance par variable complète.") 
 
-  case = st.checkbox(":gray[Afficher le code]")
+  case = st.checkbox(":gray[Afficher le code : Calcul des Feature Importances par variable]")
   code = '''feature_importances = rf.feature_importances_
 
 column_to_variable = {}
