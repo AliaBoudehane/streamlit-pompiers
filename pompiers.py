@@ -439,10 +439,10 @@ if page == pages[3]:
   \n\n Le premier test avec **4 classes**. \
   \nPour ce qui est de la classe 4 nous décidons d’y inclure les valeurs les plus fortes plus les valeurs extrêmes ce qui semble être le plus logique pour la compréhension de ces valeurs extrêmes.\
   \nNous avons donc :\
-  \nClasse 1(Temps rapide) : De 0 à 2:48 (2 min et 48 sec)\
-  \nClasse 2(Temps moyen): De 2:48 à 5:48\
-  \nClasse 3(Temps long): De 5:48 à 10:24\
-  \nClasse 4(Temps très long) : De 10:24 à 20min.")
+  \n- Classe 1(Temps rapide) : De 0 à 2:48 (2 min et 48 sec)\
+  \n- Classe 2(Temps moyen): De 2:48 à 5:48\
+  \n- Classe 3(Temps long): De 5:48 à 10:24\
+  \n- Classe 4(Temps très long) : De 10:24 à 20min.")
 
   path_to_plot8 = "plot8.html" 
   with open(path_to_plot8,'r') as f:
@@ -451,9 +451,9 @@ if page == pages[3]:
 
   st.write("Le deuxième test avec **3 classes**. \
   \nNous avons donc :\
-  \nClasse 1(Temps rapide) : De 0 à 4:04 (2 min et 48 sec)\
-  \nClasse 2(Temps moyen): De 04:04 à 10:24\
-  \nClasse 3(Temps long): De 10:24 à 20min")
+  \n- Classe 1(Temps rapide) : De 0 à 4:04 (2 min et 48 sec)\
+  \n- Classe 2(Temps moyen): De 04:04 à 10:24\
+  \n- Classe 3(Temps long): De 10:24 à 20min")
 
   path_to_plot9 = "plot9.html" 
   with open(path_to_plot9,'r') as f:
