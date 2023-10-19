@@ -659,6 +659,7 @@ if page == pages[4]:
                  \n - Fire statistics \
                  \n - Fires in Greater London\
                  \n - Incident response time\
+                 \n - Fermeture des casernes en 2014\
                  \n\n **Carte :**\
                  \n - Statistical GIS Boundary Files for London \
                  \n - Borough of London GeoJSON file")
