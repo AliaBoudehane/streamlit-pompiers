@@ -163,7 +163,7 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
 
   table = pd.read_csv("table_variables.csv")
   table = table.fillna(' ')
-  st.table(table)
+  st.dataframe(table)
   
   ## Afficher df.head() avant modélisation
   st.markdown('**Aperçu du DataFrame avant la modélisation**')
