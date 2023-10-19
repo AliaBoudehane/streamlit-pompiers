@@ -28,8 +28,7 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane | <a href="htt
                     \n- <p style="font-size: 14px"> Doravann Chou | <a href="https://www.linkedin.com/in/doravann-chou-81a999269" style="color: white;font-size: 14px">LinkedIn</a></p>\
                     \n- <p style="font-size: 14px"> Maïna Le Roux | <a href="https://www.linkedin.com/in/mainaleroux" style="color: white;font-size: 14px">LinkedIn</a> </p>', unsafe_allow_html=True)
 
-st.sidebar.markdown("[![Alia Boudehane](LinkedIn.png)](https://www.linkedin.com/in/alia-boudehane-704172185/)")
-st.sidebar.markdown("[![Alia Boudehane](LinkedIn.png)](https://www.linkedin.com/in/alia-boudehane-704172185/)")
+st.sidebar.image("LinkedIn.png")
 
 
 #### PAGE 1 : INTRODUCTION
