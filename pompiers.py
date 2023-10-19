@@ -132,7 +132,7 @@ def haversine(lat1, lon1, lat2, lon2):
 # Appliquer la fonction haversine pour calculer la distance et ajouter une colonne "Distance" au DataFrame
 df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"], row["Station_Latitude"], row["Station_Longitude"]), axis=1) '''
   if case:
-  st.code(code, language='python') 
+    st.code(code, language='python') 
 
   st.markdown(" ")
   st.markdown('**:red[La variable DateOfCall]**')
