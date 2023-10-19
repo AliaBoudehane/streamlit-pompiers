@@ -34,7 +34,7 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane |'
     <img src="data:image/png;base64,{}" width="25">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 st.sidebar.markdown('- <p style="font-size: 14px"> Doravann Chou |'
-    """<a href="href="https://www.linkedin.com/in/doravann-chou-81a999269">
+    """<a href="https://www.linkedin.com/in/doravann-chou-81a999269">
     <img src="data:image/png;base64,{}" width="25">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 st.sidebar.markdown('- <p style="font-size: 14px"> Maïna Le Roux |'
