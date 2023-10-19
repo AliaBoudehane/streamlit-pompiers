@@ -1,0 +1,11 @@
+Identification,Temporalité,Géolocatisation,Informations sur l'incident
+IncidentNumer,DateOfCall,AddressQualifier,IncidentGroup
+ResourceMobilisationId,CalYear,BoroughName,StopCodeDescription
+,MonthOfCall,IncidentStationGround,SpecialServiceType
+,DayOfCall,Distance,PropertyCategory
+,HourOfCall,,NumPumpsAttenting
+,TurnoutTimeSeconds,,PumpOrder
+,TravelTimeSeconds,,DelayCodeDescription
+,AttendanceTimeSeconds,,NumStationsWithPumpsAttending
+,MobilisationTime,,DeployedFromStation_Name
+,,,CallCount
