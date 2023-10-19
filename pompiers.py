@@ -108,7 +108,7 @@ if page == pages[1] :
                :red[***Distance*** *(en mètre)*] parcourue pour chaque mobilisation.\
               \n - **Vérification** : pour se rassurer sur la pertinence du calcul effectué, nous avons testé plusieurs distances sur Google Maps.")
    
-    case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
+case = st.checkbox(":gray[Afficher le code : Calcul de la Distance ]")
 
    code = '''# Fonction pour calculer la distance en mètres entre deux points géographiques (haversine formula)
 def haversine(lat1, lon1, lat2, lon2):
