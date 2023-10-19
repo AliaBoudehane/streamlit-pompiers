@@ -659,7 +659,7 @@ if page == pages[4]:
                  \n - [Fire statistics](https://www.gov.uk/government/publications/fire-statistics-guidance/fire-statistics-definitions#response-times) \
                  \n - [Fires in Greater London](https://data.london.gov.uk/dataset/lfb-fires-in-london-1966-2019---fire-facts)\
                  \n - [Incident response time](https://data.london.gov.uk/dataset/incident-response-times-fire-facts)\
-                 \n - [Fermeture des casernes en 2014]((https://www.london-fire.gov.uk/news/2014-news/brigade-will-remain-world-class-and-londoners-will-still-be-safe-says-authority-chief-ahead-of-station-closures/#:~:text=The%20following%2010%20fire%20stations,%2C%20Southwark%2C%20Westminster%20and%20Woolwich.)\
+                 \n - [Fermeture des casernes en 2014](https://www.london-fire.gov.uk/news/2014-news/brigade-will-remain-world-class-and-londoners-will-still-be-safe-says-authority-chief-ahead-of-station-closures/#:~:text=The%20following%2010%20fire%20stations,%2C%20Southwark%2C%20Westminster%20and%20Woolwich.)\
                  \n\n **Carte :**\
                  \n - [Statistical GIS Boundary Files for London](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london?resource=9ba8c833-6370-4b11-abdc-314aa020d5e0) : [Borough of London GeoJSON file](https://skgrange.github.io/www/data/london_boroughs.json)")
      
