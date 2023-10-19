@@ -314,7 +314,7 @@ if page == pages[3]:
   st.write("En premier lieu nous devons nettoyer notre jeu de données et supprimer les colonnes que nous avions gardé pour la DataVisualisation.\
   \nNous supprimons les colonnes d'identification (ID), la colonne DateOfCall qui répètent les informations de Day0fCall, MonthOfCall et CalYear ainsi que les colonnes TurnoutTimeSeconds et TravelTimeSeconds afin d’éviter une fuite donnée qui donneraient à tort une surperformance à notre modèle de prédiction, car elles permettent de calculer notre variable cible.")
 
-  st.write("Ensuite nous réduisons notre jeu de données en ne gardant que les informations postérieures à 2015 car une dizaine de caserne ont fermé fin 2014 dans le cadre d’un plan de secours de sauvegarde financière. \
+  st.write("Ensuite nous réduisons notre jeu de données en ne gardant que les **informations postérieures à 2015** car une dizaine de caserne ont fermé fin 2014 dans le cadre d’un plan de secours de sauvegarde financière. \
   \nCe choix a été fait afin de ne pas fausser les estimations sur ces casernes qui seraient sous représentées et afin également de supprimer les Nans présents dans la colonne Distance pour ces casernes.")
 
   st.write("Pour continuer ce nettoyage nous avons modifié le type de certaines variable numérique en catégorielle car ce sont des indicateurs temporels et qu’il ne faut pas que le modèle de prédiction cherche à les quantifier ou les ordonner.")
@@ -363,8 +363,8 @@ if page == pages[3]:
   # MODELISATION
   st.subheader("Modélisation")  
 
-  st.write("Notre objectif est d’obtenir un score de test supérieur à 70%.\
-  \nNotre variable cible est une variable continue, ce qui signifie que nous avons à faire à une méthode de régression. Après encodage de notre jeu de données\
+  st.write("Notre objectif est d’obtenir un score de test :red[**supérieur à 70%.**]\
+  \nNotre variable cible est une **variable continue**, ce qui signifie que nous avons à faire à une méthode de **régression**. Après encodage de notre jeu de données\
    nous avons un data frame de taille `(1295782 , 363)`.\
   \n\n Notre tâche sera d’estimer en fonction des informations fournies, le temps d’intervention potentiel.\
   \n \nNous allons essayer les 3 algorithmes suivants :") 
@@ -387,9 +387,9 @@ if page == pages[3]:
   with tab3:
     st.image("rf.png")
 
-  st.write("Au vu des résultats du score r2, la métrique la plus lisible, nous avons pu déterminer que le Random Forest est l’algorithme le plus performant.\
+  st.write("Au vu des résultats du score r2, la métrique la plus lisible, nous avons pu déterminer que le :red[**Random Forest**] est l’algorithme le plus performant.\
   \nCependant, nous avons un grand dataframe et ce modèle est très énergivore (Plus d’une heure d'execution).\
-  \nNous décidons donc de convertir nos valeurs dans notre variable cible en différentes classes afin de simplifier notre prédictions en une classification.")
+  \nNous décidons donc de convertir nos valeurs dans notre variable cible en différentes classes afin de simplifier notre prédictions en une :red[**classification.**]")
 
   st.write("Pour déterminer la séparation de ces classes, nous observons la distribution de notre variable cible.")
 
@@ -427,7 +427,7 @@ if page == pages[3]:
     st.image("rf5.png")
     
 
-  st.write("Random Forest est encore une fois le modèle le plus performant et cette fois-ci l'exécution est nettement plus rapide(moins de 10min), nous allons approfondir nos recherches sur ce modèle.\
+  st.write(":red[**Random Forest**] est encore une fois le modèle le plus performant et cette fois-ci l'exécution est nettement plus rapide(moins de 10min), nous allons approfondir nos recherches sur ce modèle.\
   \n\nTout d'abord nous allons modifier la classification car beaucoup de valeurs écartées se retrouvent dans la même classe,nous allons donc les répartir par temps similaire plutôt que par part égales de valeurs. En effet la classe 5 a un très mauvais recall, cela se comprend par le fait qu’il s’agit de valeurs extrêmes, elles sont moins bien représentées pour commencer mais aussi elles sont moins logiques pour le modèle de prédictions donc plus difficile encore à prédire.\
   \n\nEnsuite nous étudierons les features importantes afin de visualiser si certaines colonnes peuvent être supprimées.\
   \n\nPour finir nous nous pencherons sur les hyperparamètres.")
@@ -435,8 +435,8 @@ if page == pages[3]:
   # ETAPE 1: LES CLASSES
   st.markdown("- ##### Etape 1: Retravailler les classes")
 
-  st.write("Nous décidons de réduire nos classes, afin de déterminer la séparation de ces classes, nous observons les zones où se regroupent les temps les plus similaires. Pour cela nous ferons deux test:\
-  \n\n Le premier test avec 4 classes. \
+  st.write("Nous décidons de **réduire nos classes**, afin de déterminer la séparation de ces classes, nous observons les zones où se regroupent les temps les plus similaires. Pour cela nous ferons deux test:\
+  \n\n Le premier test avec **4 classes**. \
   \nPour ce qui est de la classe 4 nous décidons d’y inclure les valeurs les plus fortes plus les valeurs extrêmes ce qui semble être le plus logique pour la compréhension de ces valeurs extrêmes.\
   \nNous avons donc :\
   \nClasse 1(Temps rapide) : De 0 à 2:48 (2 min et 48 sec)\
@@ -449,7 +449,7 @@ if page == pages[3]:
     html_data = f.read()
   st.components.v1.html(html_data,width=910, height=450)
 
-  st.write("Le deuxième test avec 3 classes. \
+  st.write("Le deuxième test avec **3 classes**. \
   \nNous avons donc :\
   \nClasse 1(Temps rapide) : De 0 à 4:04 (2 min et 48 sec)\
   \nClasse 2(Temps moyen): De 04:04 à 10:24\
@@ -479,14 +479,14 @@ if page == pages[3]:
 
   with st.expander(label = "Lecture des résultats"):
     st.write("Les classes sont toutes bien prédites et nous avons un très bon score ainsi que de bons résultats de precision, recall et donc de F1\
-    \nNous allons maintenant tenter d'affiner la performance grâce aux hyperparamètres.")
+    \nNous allons maintenant tenter d'affiner la performance grâce aux :red[**hyperparamètres**].")
 
  
   # ETAPE 2 : HYPERPARAMETRES
   st.markdown("- ##### Etape 2 : Hyperparamètres")
 
-  st.write("Afin de connaître rapidement quelles seraient les meilleures hyperparamètres, nous allons utiliser la validation croisée (cross-validation) pour évaluer différentes combinaisons d'hyper paramètres et choisir celle qui donne les meilleures performances.\
-  \nPour cela, nous nous servirons de SearchGridCV dont voici les résultats: ")
+  st.markdown("Afin de connaître rapidement quelles seraient les meilleures hyperparamètres, nous allons utiliser la validation croisée (cross-validation) pour évaluer différentes combinaisons d'hyper paramètres et choisir celle qui donne les meilleures performances.\
+  \nPour cela, nous nous servirons de **SearchGridCV** dont voici les résultats: ")
 
   st.image("SearchGridCV.png")
   st.write("Résultat:")
