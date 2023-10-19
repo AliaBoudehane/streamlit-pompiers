@@ -57,7 +57,7 @@ if page == pages[0] :
                Intelligence Analysts de la London Fire Brigade, qui ont répondu rapidement à nos questions, et nous les en remercions.")
   st.markdown('**:red[Description des Données]**')
   st.markdown("Nous avions deux principaux jeux de données disponibles :\
-              \n - **Incident Records** : les détails de chaque incident sur lequel la LFB est intervenu depuis le 1er janvier 2009. Des informations sont\
+              \n - **Incident Records** : les détails de chaque incident sur lequel la LFB est intervenue depuis le 1er janvier 2009. Des informations sont\
                fournies sur la date et le lieu de l'incident ainsi que sur le type d'incident. \
               \n - **Mobilisation Records** : les détails de chaque véhicule d'incendie envoyé sur les lieux d'un incident depuis janvier 2009.\
               Des informations sont fournies sur l'engin mobilisé, le lieu d'où il a été déployé et les heures d'arrivée sur les lieux de l'incident.")
@@ -139,9 +139,6 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
   st.markdown(" ")
 
   st.subheader("DataCleaning :male-firefighter:")
-  st.markdown("Sans rentrer dans le détail, expliquer les modifications apportées / sélection des variables.\
-              \n Afficher un aperçu de df_final\
-              et aussi df.info(), autre information intéressante à ce stade")
   
   st.markdown('**:red[Gestion des doublons]**')
   st.markdown("Nous n'avions aucun doublon dans notre jeu de données.")
@@ -162,11 +159,11 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
               \n\n Suite à la sélection finale des variables que nous conserverons avant d'entâmer la partie modélisation, notre jeu de données ne présente plus aucun Nan.")
 
   st.markdown('**:red[Variables Conservées dans notre DataFrame Final]**')
-  st.markdown("Voici la liste des variables conservées (**25 au total**), avant de démarrer nos premières modélisations :\
-              \n\n *'IncidentNumber', 'DateOfCall', 'CalYear', 'HourOfCall',\
-              'IncidentGroup', 'StopCodeDescription', 'SpecialServiceType', 'PropertyCategory', 'AddressQualifier', 'BoroughName', 'IncidentStationGround',\
-              'NumStationsWithPumpsAttending', 'NumPumpsAttending', 'CallCount', 'ResourceMobilisationId', 'TurnoutTimeSeconds', 'TravelTimeSeconds', 'AttendanceTimeSeconds',\
-              'DeployedFromStation_Name', 'PumpOrder', 'DelayCode_Description', 'MobilisationTime', 'MonthOfCall', 'DayOfCall', 'Distance'*")
+  st.markdown("Voici la liste des variables conservées (**25 au total**), avant de démarrer nos premières modélisations :")
+
+  table = pd.read_csv("table_variables.csv")
+  table = table.fillna(' ')
+  st.dataframe(table)
   
   ## Afficher df.head() avant modélisation
   st.markdown('**Aperçu du DataFrame avant la modélisation**')
