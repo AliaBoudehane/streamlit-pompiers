@@ -31,15 +31,15 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane | <a href="htt
 
 st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane |'
     """<a href="https://www.linkedin.com/in/alia-boudehane-704172185/">
-    <img src="data:image/png;base64,{}" width="25">
+    <img src="data:image/png;base64,{}" width="18">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 st.sidebar.markdown('- <p style="font-size: 14px"> Doravann Chou |'
     """<a href="https://www.linkedin.com/in/doravann-chou-81a999269">
-    <img src="data:image/png;base64,{}" width="25">
+    <img src="data:image/png;base64,{}" width="18">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 st.sidebar.markdown('- <p style="font-size: 14px"> Maïna Le Roux |'
     """<a href="https://www.linkedin.com/in/mainaleroux">
-    <img src="data:image/png;base64,{}" width="25">
+    <img src="data:image/png;base64,{}" width="18">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 
 
