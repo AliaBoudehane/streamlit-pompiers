@@ -43,7 +43,7 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Maïna Le Roux |'
 
 if page == pages[0] : 
   st.image('lfb2.jpeg')
-  st.write('Crédit Photo : London Fire Brigade')
+  st.write(':grey[*Crédit Photo : London Fire Brigade*]')
   st.header("Introduction")
   st.subheader('Le Sujet')
   st.markdown("La **:red[London Fire Brigade (LFB)]** est le service d'incendie et de secours le plus actif du pays.\
