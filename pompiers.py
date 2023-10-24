@@ -25,10 +25,6 @@ page=st.sidebar.radio('', pages)
 st.sidebar.divider()
 st.sidebar.markdown('Auteurs')
 
-st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane | <a href="https://www.linkedin.com/in/alia-boudehane-704172185/" style="color: white;font-size: 14px">LinkedIn</a></p>\
-                    \n- <p style="font-size: 14px"> Doravann Chou | <a href="https://www.linkedin.com/in/doravann-chou-81a999269" style="color: white;font-size: 14px">LinkedIn</a></p>\
-                    \n- <p style="font-size: 14px"> Maïna Le Roux | <a href="https://www.linkedin.com/in/mainaleroux" style="color: white;font-size: 14px">LinkedIn</a> </p>', unsafe_allow_html=True)
-
 st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane |'
     """<a href="https://www.linkedin.com/in/alia-boudehane-704172185/">
     <img src="data:image/png;base64,{}" width="18">
@@ -47,6 +43,7 @@ st.sidebar.markdown('- <p style="font-size: 14px"> Maïna Le Roux |'
 
 if page == pages[0] : 
   st.image('lfb2.jpeg')
+  st.write('Crédit Photo : London Fire Brigade')
   st.header("Introduction")
   st.subheader('Le Sujet')
   st.markdown("La **:red[London Fire Brigade (LFB)]** est le service d'incendie et de secours le plus actif du pays.\
