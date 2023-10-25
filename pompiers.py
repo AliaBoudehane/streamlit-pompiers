@@ -618,7 +618,7 @@ if page == pages[4]:
                cela mis en application diverses techniques dont la réduction de dimensions, la heatmap, les tests de corrélation ainsi\
                que les features importances. Nous avons également réduit nos données aux dates supérieures à 2015, puisque fin 2014, 10 casernes ont fermé\
                dans le cadre d’un plan de sauvegarde financière.\
-              \n\n Cette abondance de données nous a d’ailleurs obligé à basculer sur un modèle de :red[classification] pour améliorer la rapidité et la précision\
+              \n\n Cette abondance de données nous a d’ailleurs obligé à basculer sur un modèle de :red[**classification**] pour améliorer la rapidité et la précision\
                de notre modèle le plus performant.\
               \n\n Malgré notre motivation et par faute de temps, nous avons décidé de nous concentrer uniquement sur la première variable cible AttendanceTimeSeconds.\
               Nous avons utilisé plusieurs modèles et l’avons amélioré jusqu’à atteindre notre objectif. Notre meilleur modèle retenu est le Random Forest Classifier,\
