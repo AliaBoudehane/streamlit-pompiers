@@ -283,8 +283,7 @@ if page == pages[2] :
             par les detecteurs de fumée). Concernant les feux il y a majoritairement des feux de grande ampleur.\
              \n\n Au cours des années le volume d'incidents varie sensiblement, cependant nous constatons un accroissement constant depuis 2015.\
              \n\n L'année 2023 n'étant pas finie elle n'est pas encore éligible à une bonne lecture, nos données s'arretent à Juillet 2023 soit 60% de l'année , si la tendance moyenne\
-              d'évolution du volume d'incident du mois reste la même nous pourrions nous attendre à avoir un volume dépassant les 170 000 incidents d'ici la fin de l'année.\
-             Une estimation qui vient se rapprocher des résultats de l'année 2022.") 
+              d'évolution du volume d'incident du mois reste la même nous pourrions nous attendre à avoir un volume qui vient se rapprocher des résultats de l'année 2022.") 
 
   ## DataViz Nombre d'incident selon heure de la journée
   st.markdown(" ")
