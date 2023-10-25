@@ -587,7 +587,7 @@ if page == pages[4]:
   st.markdown("La première chose qui nous a interpellé est le **volume des données**, nous avions avant toute modification, deux dataframes que nous avons couplé\
                pour obtenir un jeu de données de taille `(2220718, 58)`.\
               \n\n Il nous a fallu en premier lieu tenter de comprendre l’intégralité de ces variables. Certaines semblaient évidentes, d’autres, malgré\
-               la présence des fichiers de Metadata présentant une courte description des variables, ont nécessité la sollicitation de Bi Analyst et Data Analyst\
+               la présence des fichiers de Metadata présentant une courte description des variables, ont nécessité la sollicitation de **Bi Analyst et Data Analyst**\
                du site LFB que nous avons contacté pour s’assurer de la bonne interprétation des données.\
               \n\n Une fois cela fait, nous avons pu décider quelles variables devaient être supprimées.\
               Cette étape fut complexe par la diversité de celles-ci et l’anticipation requise dans l’analyse de leur nécessité pour le calcul de notre variable\
@@ -604,9 +604,9 @@ if page == pages[4]:
   st.markdown("Nous avons pris plaisir à cette étape de notre projet et avons proposé un large panel de visualisations.\
               \n\nNous avons cependant été restreint par les performances réduites et les bugs liés à la volumétrie importante de nos données\
                et l’utilisation de certaines librairies.\
-              \n\n En effet nous avons fortement apprécié les visualisations et l’interface proposées par Plotly express, mais il a été difficile\
+              \n\n En effet nous avons fortement apprécié les visualisations et l’interface proposées par **Plotly express**, mais il a été difficile\
                de les générer pour certains d’entre eux.\
-              \n\n Nous sommes fiers d’avoir pu proposer des cartes pour nos visualisations que nous avons créées grâce aux fichiers GeoJson que nous nous\
+              \n\n Nous sommes fiers d’avoir pu proposer **des cartes** pour nos visualisations que nous avons créées grâce aux fichiers GeoJson que nous nous\
                sommes procurés sur le site du London Data Store et également par le biais d’une des Data Analyst que nous avons contacté.")
 
   st.markdown(" ")
@@ -615,10 +615,10 @@ if page == pages[4]:
 
   st.markdown("Encore une fois lors de cette étape, nous avions un gros challenge concernant l’importante volumétrie de nos données.\
               \n\n Nous avons tenté de réduire au mieux les données sans perdre d’informations précieuses à notre travail de prédiction. Nous avons pour\
-               cela mis en application diverses techniques dont la réduction de dimensions, la heatmap, les tests de corrélation et d’indépendance ainsi\
+               cela mis en application diverses techniques dont la réduction de dimensions, la heatmap, les tests de corrélation ainsi\
                que les features importances. Nous avons également réduit nos données aux dates supérieures à 2015, puisque fin 2014, 10 casernes ont fermé\
                dans le cadre d’un plan de sauvegarde financière.\
-              \n\n Cette abondance de données nous a d’ailleurs obligé à basculer sur un modèle de classification pour améliorer la rapidité et la précision\
+              \n\n Cette abondance de données nous a d’ailleurs obligé à basculer sur un modèle de :red[classification] pour améliorer la rapidité et la précision\
                de notre modèle le plus performant.\
               \n\n Malgré notre motivation et par faute de temps, nous avons décidé de nous concentrer uniquement sur la première variable cible AttendanceTimeSeconds.\
               Nous avons utilisé plusieurs modèles et l’avons amélioré jusqu’à atteindre notre objectif. Notre meilleur modèle retenu est le Random Forest Classifier,\
