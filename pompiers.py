@@ -178,7 +178,7 @@ df["Distance"] = df.apply(lambda row: haversine(row["Latitude"], row["Longitude"
   st.dataframe(table)
   
   ## Afficher df.head() avant modélisation
-  st.markdown('**Aperçu du DataFrame avant la modélisation**')
+  st.markdown('**Aperçu du DataFrame avant d'entâmer les DataViz**')
   df_modelisation = pd.read_csv("df_modelisation.csv",index_col = 0)
   st.dataframe(df_modelisation)
 
