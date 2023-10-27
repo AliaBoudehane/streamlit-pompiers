@@ -26,7 +26,7 @@ st.sidebar.divider()
 st.sidebar.markdown('Auteurs')
 
 st.sidebar.markdown('- <p style="font-size: 14px"> Alia Boudehane |'
-    """<a href="https://www.linkedin.com/in/alia-boudehane-704172185/">
+    """<a href="https://www.linkedin.com/in/alia-boudehane">
     <img src="data:image/png;base64,{}" width="18">
     </a>""".format(base64.b64encode(open("LinkedIn.png", "rb").read()).decode() ),unsafe_allow_html=True,)
 st.sidebar.markdown('- <p style="font-size: 14px"> Doravann Chou |'
